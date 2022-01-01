@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './component/header'
+import Login from './component/logIn'
+import SignUp from './component/signUp'
+import { LoginContext } from './component/context/context'
+import Resturants from './component/resturants/resturants'
+import {
+  BrowserRouter as Router,
 
-function App() {
+  Route, Routes
+} from "react-router-dom";
+import Home from './component/home/home'
+
+export default function App() {
+  const Hoome = useContext(LoginContext)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <Router>
 
-export default App;
+
+        <Header />
+
+
+        <Routes>
+
+          <Route exact path="/" element={
+            <>
+              {Hoome.LoggedIn &&
+                <Home />
+              }
+
+              {!Hoome.LoggedIn &&
+                <Login />
+
+              }
+
+            </>
+          }></Route>
+
+          <Route exact path="/resturants" element={
+            <>
+              <Resturants />
+            </>
+          }></Route>
+
+<Route exact path="/signup" element={
+            <>
+              <SignUp />
+            </>
+          }></Route>
+        </Routes>
+
+
+      </Router>
+    </div>
+  )
+}
