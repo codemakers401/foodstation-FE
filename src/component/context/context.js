@@ -37,7 +37,7 @@ export default function LoginProvider(props) {
 
     }
     const logoutFunction = () => {
-
+            console.log(';;;;;;;;;;;;');
         // it will update the LoggedIn flag into false
         setLoggedIn(false);
         setUser({});

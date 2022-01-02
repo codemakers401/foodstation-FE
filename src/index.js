@@ -4,12 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Context1 from './component/context/context'
+import { ChakraProvider } from '@chakra-ui/react'
+
 
 ReactDOM.render(
 
   <React.StrictMode>
+    
     <Context1>
+    <ChakraProvider>
     <App />
+    </ChakraProvider>
     </Context1>
   </React.StrictMode>,
   document.getElementById('root')
