@@ -23,7 +23,7 @@ export default function customerHome() {
                 <Card.Img variant="top" src={Img2} />
                 <Card.Body>
                     <Card.Title>Orders Reports</Card.Title>
-                    <Link to="/items">
+                    <Link to="/orderReport">
                         <Button variant="primary">Go </Button>
                     </Link>
                 </Card.Body>

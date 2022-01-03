@@ -1,11 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import Auth from '../context/auth'
 import Admin from './adminHome'
 import Driver from './driverHome'
 import Customer from './customerHome'
-
-
-export default function home(props) {
+import {LoginContext} from '../context/context'
+import LoggedIN from '../logIn'
+export default function Home(props) {
+    const authContext = useContext(LoginContext)
     return (
         <div>
             <Auth capability='admin'>
@@ -19,7 +20,13 @@ export default function home(props) {
             <Auth capability='driver'>
                 <Driver />
                 
-            </Auth>
+            </Auth >
+
+            {!authContext.LoggedIn &&
+             <LoggedIN />
+            }
+
+
         </div>
     )
 }

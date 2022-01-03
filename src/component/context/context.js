@@ -31,7 +31,7 @@ export default function LoginProvider(props) {
               console.log(response.body.user.actions)
                setCapabilities(response.body.user.actions)
 
-
+               
             validateMyToken(response.body.user );
         } catch (err) { }
 
@@ -65,9 +65,12 @@ export default function LoginProvider(props) {
 
     useEffect(() => {
         // check the token
-
+        
         const myTokenCookie = cookie.load('token');
+        if(myTokenCookie){
+        setCapabilities(myTokenCookie.actions)}
         validateMyToken(myTokenCookie);
+
     }, []);
 
 
@@ -75,6 +78,7 @@ export default function LoginProvider(props) {
     const can = (capability) => {
         // chaining
         //optional chaining
+        console.log(capabilities);
         return capabilities?.includes(capability);
     }
 

@@ -11,6 +11,10 @@ import Status from './component/status/status'
 import Order from './component/order/order'
 import NewOrder from './component/createNewOrder/createNewOrder'
 import ShowItems from './component/showItems/showItems'
+import OrderReport from './component/orderReports/orderReports'
+import ReadyOrders from'./component/readyOrders/readyOrders'
+import DeleveryOrders from './component/readyOrders/deleveryOrders'
+import Profile from './component/profile'
 import {
   BrowserRouter as Router,
 
@@ -87,10 +91,32 @@ console.log(Hoome.LoggedIn);
             </>
           }></Route>
 
-          
+<Route exact path="/orderReport" element={
+            <>
+              <OrderReport />
+            </>
+          }></Route>
+
 <Route exact path="/showItems" element={
             <>
               <ShowItems />
+            </>
+          }></Route>
+
+<Route exact path="/readyOrders" element={
+            <>
+              <ReadyOrders />
+            </>
+          }></Route>
+
+<Route exact path="/deleveryOrders" element={
+            <>
+              <DeleveryOrders />
+            </>
+          }></Route>
+<Route exact path="/profile" element={
+            <>
+              <Profile />
             </>
           }></Route>
 
