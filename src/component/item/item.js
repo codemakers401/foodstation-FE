@@ -62,11 +62,14 @@ const handleShowNew =()=>{
                     itemName : e.target.name.value,
                     itemCategory:e.target.category.value,
                     itemPrice:e.target.price.value,
+                    itemimg:e.target.img.value,
+
                     restaID : e.target.id.value,
                     available:e.target.status.value
 
 
                 }
+                console.log(updatedData);
         setShow1(false)
 
         let cookieData = cookie.load('token')
@@ -84,6 +87,8 @@ const handleShowNew =()=>{
             itemName : e.target.name.value,
             itemCategory:e.target.category.value,
             itemPrice:e.target.price.value,
+            itemimg:e.target.img.value,
+
             restaID : e.target.id.value,
             available:e.target.status.value
 
@@ -137,8 +142,7 @@ const handleShowNew =()=>{
                 textAlign={'center'}>
                 <Avatar
                     size={'xl'}
-                    src={
-                        'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+                    src={item.itemimg
                     }
                     alt={'Avatar Alt'}
                     mb={4}
@@ -238,6 +242,12 @@ const handleShowNew =()=>{
                             id="price"
                             aria-describedby="passwordHelpBlock"
                         />
+                        <Form.Label htmlFor="inputPassword5">Item Img Url</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="img"
+                            aria-describedby="passwordHelpBlock"
+                        />
                         <Form.Label htmlFor="inputPassword5">Resturant ID </Form.Label>
                         <Form.Control
                             type="number"
@@ -311,6 +321,12 @@ const handleShowNew =()=>{
                         <Form.Control
                             type="number"
                             id="price"
+                            aria-describedby="passwordHelpBlock"
+                        />
+                          <Form.Label htmlFor="inputPassword5">Item Img Url</Form.Label>
+                        <Form.Control
+                            type="number"
+                            id="img"
                             aria-describedby="passwordHelpBlock"
                         />
                         <Form.Label htmlFor="inputPassword5">Resturant ID </Form.Label>

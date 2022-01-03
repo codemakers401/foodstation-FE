@@ -40,7 +40,8 @@ import {
        let updatedData = {
         userEmail:e.target.name.value,
         userAddress:e.target.address.value,
-        userPhone:e.target.phone.value
+        userPhone:e.target.phone.value,
+        userimg : e.target.img.value
        }
        let api = 'http://localhost:3020'
        let cookieData = cookie.load('token')
@@ -80,9 +81,9 @@ import {
           <Flex justify={'center'} mt={-12}>
             <Avatar
               size={'xl'}
-              src={
-                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-              }
+              src={item.userimg }
+                      
+        
               alt={'Author'}
               css={{
                 border: '2px solid white',
@@ -141,6 +142,11 @@ import {
     <Form.Control
       type="number"
       id="phone"
+      aria-describedby="passwordHelpBlock"
+    /><Form.Label htmlFor="inputPassword5">IMG URL</Form.Label>
+    <Form.Control
+      type="text"
+      id="img"
       aria-describedby="passwordHelpBlock"
     />
 
