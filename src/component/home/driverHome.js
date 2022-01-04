@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button ,Row} from 'react-bootstrap'
 import Img1 from '../../asset/items.jpg'
 import {
     Stack,
@@ -13,7 +13,9 @@ import {
 export default function CustomerHome() {
     return (
         <div>
-            <Card style={{ width: '18rem' }}>
+                                <Row xs={1} md={3} className="g-4">
+
+            <Card style={{ width: '18rem' , margin:'50px' }} >
                 <Card.Img variant="top" src={Img1} />
                 <Card.Body>
                     <Card.Title>Ready Orders</Card.Title>
@@ -23,7 +25,7 @@ export default function CustomerHome() {
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' , margin:'50px'}}>
                 <Card.Img variant="top" src={Img1} />
                 <Card.Body>
                     <Card.Title>My  Delivary Cart</Card.Title>
@@ -32,6 +34,7 @@ export default function CustomerHome() {
                     </Link>
                 </Card.Body>
             </Card>
+            </Row>
         </div>
     )
 }

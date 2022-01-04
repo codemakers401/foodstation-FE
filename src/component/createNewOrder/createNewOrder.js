@@ -10,21 +10,23 @@ export default function CreateNewOrder() {
   const [items, setItems] = useState([])
   const [showItemss, setShowItems] = useState(true)
   const [show, setShow] = useState(false);
-  const [order, setOrder] = useState([])
+  const [order, setOrder] = useState([{}])
   const [id, setID] = useState()
-
+  const [refresh , setRefresh] = useState(false)
   useEffect(async () => {
     let api = 'http://localhost:3020'
     let cookieData = cookie.load('token')
+
     let resturantData = await superagent.get(`${api}/restaurant`).set({ 'Authorization': 'Bearer ' + cookieData.token })
     console.log(resturantData.body);
     setData(resturantData.body)
-
-    setOrder(cookie.load('order'));
-  }, []);
+     if(cookie.load('order')){
+    setOrder(cookie.load('order'))}
+  }, [refresh]);
 
   console.log(order);
   const showItems = async (e) => {
+    
     console.log(e);
     let id = e
     let api = 'http://localhost:3020'
@@ -33,7 +35,10 @@ export default function CreateNewOrder() {
     console.log(resturantData.body);
     setItems(resturantData.body)
     setShowItems(false)
+
+
   }
+
   const handleClose = () => { setShow(false) };
 
 
@@ -47,9 +52,14 @@ export default function CreateNewOrder() {
     e.preventDefault()
     console.log(e.target.qty.value);
     let quantity = e.target.qty.value
-    setOrder([...order, { itemID: id, qty: quantity }])
-    cookie.save('order', order)
+    console.log(order);
+    let xig = order
+xig=[...order, { itemID: id, qty: quantity }]
+    setOrder(xig)
+    
+    cookie.save('order', xig)
     setShow(false)
+
   }
 
   const deleteItems = (e) => {
@@ -58,6 +68,7 @@ export default function CreateNewOrder() {
     order.splice(e.target.id, 1)
     console.log(order);
     cookie.save('order', order)
+    setRefresh(!refresh)
   }
 
   const confirmOrder =async (e) => {
@@ -71,6 +82,7 @@ let toDataBase = await superagent.post(`${api}/order`,confirmedOrder).set({ 'Aut
 console.log(toDataBase);
 order.splice(e.target.id, 1)
 cookie.save('order', order)
+setRefresh(!refresh)
 
 
   }
@@ -331,7 +343,7 @@ item.itemimg                    }
         </thead>
         <tbody>
 
-          {  order.map((item, index) => {
+          { order && order.map((item, index) => {
 
             return (
               <tr key={index}>

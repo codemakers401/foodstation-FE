@@ -17,6 +17,7 @@ import {
 export default function DeleveryOrders() {
 
 const [myOOrder,setmyOOrder] = useState([])
+const [refresh , setRefresh] = useState(false)
 
 
 
@@ -30,7 +31,7 @@ const [myOOrder,setmyOOrder] = useState([])
        setmyOOrder(driverOrders.body)}catch(error){
            console.log(error);
        }
-    }, []);
+    }, [refresh]);
 
 
 
@@ -43,7 +44,7 @@ const [myOOrder,setmyOOrder] = useState([])
     let newData = {statusID :myOOrder[index].statusID+1 , driverid :cookieData.id }
     let updateStatus = await  superagent.put(`${api}/order/${e.id}`,newData).set({ 'Authorization': 'Bearer ' + cookieData.token })
     }
-
+    setRefresh(!refresh)
 }
 
 

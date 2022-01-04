@@ -78,8 +78,8 @@ const handleShowNew =()=>{
 
     return (
         <div >
-                <div><Button variant="primary" onClick={handleShowNew}>ADD NEW RESTURANT</Button></div>  <br/>
-            <Table striped bordered hover variant="light">
+                <div style={{textAlign:'center'}}><Button variant="primary" onClick={handleShowNew}>ADD NEW RESTURANT</Button></div>  <br/>
+            <Table striped bordered hover variant="light" style={{margin:'100px'}}>
                 <thead>
                     <tr>
 

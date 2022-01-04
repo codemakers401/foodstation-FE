@@ -16,6 +16,7 @@ import superagent from 'superagent'
 import cookie from 'react-cookies';
 export default function ReadyOrders() {
 const [data,setData] = useState([])
+const [refresh , setRefresh] = useState(false)
 console.log(data);
 
     useEffect(async () => {
@@ -28,7 +29,7 @@ console.log(data);
         console.log(filterdArray);
 
         setData(filterdArray)
-    }, []);
+    }, [refresh]);
 
  const addToMyCar=async(e,index)=>{
 
@@ -40,7 +41,7 @@ let cookieData = cookie.load('token')
 let newData = {statusID :data[index].statusID+1 , driverid :cookieData.id }
 let updateStatus = await  superagent.put(`${api}/order/${e.id}`,newData).set({ 'Authorization': 'Bearer ' + cookieData.token })
 
-
+setRefresh(!refresh)
 
 
  }
