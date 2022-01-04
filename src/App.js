@@ -17,6 +17,8 @@ import {
   Route, Routes
 } from "react-router-dom";
 import Home from './component/home/home'
+import About from './component/about/about'
+import Footer from './component/footer/footer'
 
 export default function App() {
   const Hoome = useContext(LoginContext)
@@ -99,9 +101,14 @@ console.log(Hoome.LoggedIn);
               <SignUp />
             </>
           }></Route>
+          <Route exact path ='/about' element={
+            <>
+            <About/>
+            </>
+          }></Route>
         </Routes>
 
-        
+        <Footer/>
       </Router>
     </div>
   )
