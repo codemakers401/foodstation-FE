@@ -4,35 +4,35 @@ import { Link } from "react-router-dom";
 import Img1 from '../../asset/resturant.jpg'
 import Img2 from '../../asset/items.jpg'
 import Img3 from '../../asset/report.png'
-import Img4 from '../../asset/status.jpg'
+import Img4 from '../../asset/shop.jpg'
 export default function customerHome() {
     return (
-        <div>
+        <div style={{marginLeft : '100px'  }}>
                     <Row xs={1} md={3} className="g-4">
 
-            <Card style={{ width: '18rem' , margin:'50px' }}>
-                <Card.Img variant="top" src={Img1} />
-                <Card.Body>
-                    <Card.Title>Create New Order</Card.Title>
+            <Card style={{ width: '18rem' , margin:'70px' ,backgroundColor:'orangered' }}>
+                <Card.Img variant="top" src={Img4} />
+                <Card.Body style={{textAlign :'center'}}>
+                    
                     <Link to="/createOrder">
-                        <Button variant="primary">Go </Button>
+                        <Button variant="primary" >Shop Now</Button>
                     </Link>
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem'  , margin:'50px'}}>
-                <Card.Img variant="top" src={Img2} />
-                <Card.Body>
-                    <Card.Title>Orders Reports</Card.Title>
+            <Card style={{ width: '18rem'  , margin:'70px',backgroundColor:'orangered' }}>
+                <Card.Img variant="top" src={Img3} />
+                <Card.Body style={{textAlign :'center'}}>
+                    
                     <Link to="/orderReport">
-                        <Button variant="primary">Go </Button>
+                        <Button variant="primary">My Orders  </Button>
                     </Link>
                 </Card.Body>
             </Card>
 
             
 
-            <Card style={{ width: '18rem'  , margin:'50px'}}>
+            {/* <Card style={{ width: '18rem'  , margin:'70px'}}>
                 <Card.Img variant="top" src={Img3} />
                 <Card.Body>
                     <Card.Title>Trace Order</Card.Title>
@@ -40,7 +40,7 @@ export default function customerHome() {
                         <Button variant="primary">Go </Button>
                     </Link>
                 </Card.Body>
-            </Card>
+            </Card> */}
             </Row>
         </div>
     )

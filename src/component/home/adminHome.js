@@ -11,42 +11,39 @@ export default function customerHome() {
         <div>
                     <Row xs={1} md={3} className="g-4">
 
-            <Card style={{ width: '18rem' , margin:'50px'}}>
+            <Card style={{ width: '18rem' , margin:'50px' , backgroundColor :'orangered'}}>
                 <Card.Img variant="top" src={Img1} />
-                <Card.Body>
-                    <Card.Title>Resturant</Card.Title>
+                <Card.Body style={{textAlign : 'center'}}>
+                   
                     <Link to ="/resturants">
-                    <Button variant="primary">Go </Button>
+                    <Button variant="primary">Resturant List </Button>
                     </Link>
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={Img2} />
-                <Card.Body>
-                    <Card.Title>Items</Card.Title>
-                    <Link to ="/items">
-                    <Button variant="primary">Go </Button>
+            <Card style={{ width: '18rem', margin:'50px' ,backgroundColor :'orangered' }}>
+                <Card.Img variant="top" src={'https://cdn4.iconfinder.com/data/icons/hotel-and-restaurant-1-8/50/71-512.png'} />
+                <Card.Body style={{textAlign : 'center'}}>
+                    <Link to ="/items" >
+                    <Button variant="primary">Items List </Button>
                     </Link>
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem' , margin:'50px'}}>
+            <Card style={{ width: '18rem' , margin:'50px' ,backgroundColor :'orangered'}}>
                 <Card.Img variant="top" src={Img4} />
-                <Card.Body>
-                    <Card.Title>Status</Card.Title>
+                <Card.Body style={{textAlign : 'center'}}>
                     <Link to ="/status">
-                    <Button variant="primary">Go </Button>
+                    <Button variant="primary">Status List </Button>
                     </Link>
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem', margin:'50px' }}>
+            <Card style={{ width: '18rem', margin:'50px' , backgroundColor :'orangered'}}>
                 <Card.Img variant="top" src={Img3} />
-                <Card.Body>
-                    <Card.Title>order reports</Card.Title>
+                <Card.Body style={{textAlign : 'center'}}>
                     <Link to ="/order">
-                    <Button variant="primary">Go </Button>
+                    <Button variant="primary">order reports </Button>
                     </Link>
                 </Card.Body>
             </Card>

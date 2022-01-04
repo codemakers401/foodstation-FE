@@ -15,6 +15,7 @@ import OrderReport from './component/orderReports/orderReports'
 import ReadyOrders from'./component/readyOrders/readyOrders'
 import DeleveryOrders from './component/readyOrders/deleveryOrders'
 import Profile from './component/profile'
+import GPS from './component/gps/gps'
 import {
   BrowserRouter as Router,
 
@@ -33,7 +34,7 @@ console.log(Hoome.LoggedIn);
       <Router>
 
 
-        <Header /><br/><br/><br/>
+        <Header />
 
 
         <Routes>
@@ -86,6 +87,12 @@ console.log(Hoome.LoggedIn);
               <Status />
             </>
           }></Route>
+<Route exact path="/gps" element={
+            <>
+              <GPS />
+            </>
+          }></Route>
+
 
 <Route exact path="/order" element={
             <>

@@ -52,7 +52,9 @@ setRefresh(!refresh)
     return (
         <div>
                             <Row xs={1} md={6} className="g-4">
-
+                  {(!data  || !data.length ) && 
+                   <div>No Order Now</div>
+                  }
             {data.map((item,index)=>{
                 console.log(item);
                 return(
@@ -62,6 +64,7 @@ setRefresh(!refresh)
                 <Box
                     maxW={'320px'}
                     w={'full'}
+                    bg={'orangered'}
                     boxShadow={'2xl'}
                     rounded={'lg'}
                     p={6}
@@ -69,7 +72,7 @@ setRefresh(!refresh)
                     <Avatar
                         size={'xl'}
                         src={
-                            'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6uEM-z4p9RJ64hourfB4jqBUI0O-iJQdLjbKTcPV3HIKFIXaIF3d2Tv-8OYBUj-XPEH0&usqp=CAU'
                         }
                         alt={'Avatar Alt'}
                         mb={4}
@@ -89,19 +92,13 @@ setRefresh(!refresh)
                     <Heading fontSize={'2xl'} fontFamily={'body'}>
                         ID : {item.id}
                     </Heading>
-                    <Text fontWeight={600} color={'gray.500'} mb={4}>
+                    <Text fontWeight={600} color={'black.500'} mb={4}>
                         STATUS : {item.orderStatus.StatusName}
                     </Text>
-                    <Text fontWeight={600} color={'gray.500'} mb={4}>
+                    <Text fontWeight={600} color={'black.500'} mb={4}>
                         TOTAL : {item.totalBill} $
                     </Text>
-                    <Text
-                        textAlign={'center'}
-                        color={'gray.500'}
-                        px={3}>
-                        ADDRESS : 
-
-                    </Text>
+           
 
                     <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
 

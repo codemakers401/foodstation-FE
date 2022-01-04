@@ -35,8 +35,10 @@ const getDetails=()=>{
 
     return (
         <>
+        {(!allOrder ||allOrder.length === 0) && 
+ <div>NO ORDER AVILABLE</div>}
                 <Row xs={1} md={3} className="g-4">
-
+{console.log(allOrder)}
         {allOrder && allOrder.map((item,index)=>{
               
        return (
@@ -54,7 +56,7 @@ const getDetails=()=>{
           <Avatar
             size={'xl'}
             src={
-              'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+              'https://thumbs.dreamstime.com/b/food-drone-logo-icon-design-can-be-used-as-complement-to-125574252.jpg'
             }
             alt={'Avatar Alt'}
             mb={4}
@@ -91,11 +93,29 @@ const getDetails=()=>{
         <Text fontWeight={600} color={'gray.500'} mb={4}>
           Order Status : {item.orderStatus.StatusName}
         </Text>
-  
+            <Link href='/gps'>
+             <Button flex={1}
+                            fontSize={'sm'}
+                            rounded={'full'}
+                            bg={'blue.400'}
+                            color={'white'}
+                            boxShadow={
+                                '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                            }
+                            _hover={{
+                                bg: 'blue.500',
+                            }}
+                            _focus={{
+                                bg: 'blue.500',
+                            }} >
+               Trace Order
+             </Button></Link>
+
           <Stack mt={8} direction={'row'} spacing={4}>
             
          
           </Stack>
+
         </Box>
       </Center>
 
@@ -104,6 +124,8 @@ const getDetails=()=>{
 )
  })}
  </Row>
+
+ 
 </>
     );
   }

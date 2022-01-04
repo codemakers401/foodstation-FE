@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import superagent from 'superagent'
 import cookie from 'react-cookies';
 import { Modal, Form, Row, Table } from 'react-bootstrap'
+import Res from '../../asset/res.jpg'
 
 export default function CreateNewOrder() {
   const [data, setData] = useState([])
@@ -98,13 +99,13 @@ setRefresh(!refresh)
                   w={'full'}
                   boxShadow={'2xl'}
                   rounded={'lg'}
+                  bg={'orangered'}
                   p={6}
                   textAlign={'center'}>
                   <Avatar
-                    size={'xl'}
+                    size={'xxl'}
                     src={
-                      'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-                    }
+                      Res                    }
                     alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
@@ -155,7 +156,7 @@ setRefresh(!refresh)
                       }}
                       onClick={() => showItems(item.id)}
                     >
-                      Show Items
+                      Show Menu
                     </Button>
                   </Stack>
                 </Box>
@@ -171,12 +172,12 @@ setRefresh(!refresh)
       }
 
       {!showItemss &&
-        <Row xs={1} md={6} className="g-4">
-          {items.map((item, index) => {
+        <Row xs={1} md={6} className="g-4" >
+          {  items.map((item, index) => {
             { console.log(item) }
             return (
 
-              <Center py={6}>
+              <Center py={6} style={{margin : '100px'}}>
 
 
                 <Box
@@ -259,7 +260,7 @@ item.itemimg                    }
                       id={item.itemId}
                       onClick={handleShow}
                     >
-                      Click
+                      Add To Cart
                     </Button>
                   </Stack>
                 </Box>
@@ -276,7 +277,7 @@ item.itemimg                    }
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Updating Form</Modal.Title>
+          <Modal.Title>Add Quantity</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={getQuantity} >
@@ -319,7 +320,7 @@ item.itemimg                    }
                 _focus={{
                   bg: 'blue.500',
                 }} variant="primary" type="onSubmit">
-                Update
+                ADD
               </Button>
             </Modal.Footer>
           </Form>
@@ -328,12 +329,14 @@ item.itemimg                    }
 
       </Modal>
 
-      <Table striped bordered hover variant="light">
+      <Table striped bordered hover variant="light" >
         <thead>
           <tr>
 
             <th>No.</th>
             <th>Item ID</th>
+            
+
             <th>Quantity</th>
             <th>Delete</th>
             <th>Confirm</th>
@@ -350,6 +353,8 @@ item.itemimg                    }
 
                 <td>{index + 1}</td>
                 <td>{item.itemID}</td>
+                
+
                 <td>{item.qty}</td>
                 <td > <Button flex={1}
                   fontSize={'sm'}

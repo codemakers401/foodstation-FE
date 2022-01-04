@@ -63,6 +63,7 @@ import {
         return(<>
       <Center py={6}>
         <Box
+        bg={'gray.200'}
           maxW={'700px'}
           w={'full'}
           boxShadow={'2xl'}
@@ -103,9 +104,10 @@ import {
             </Stack>
   
             
-  
+             <div style={{textAlign:'center'}} >
             <Button
-              w={'full'}
+              w={'200px'}
+              style={{align:'center'}}
               bg={'blue.400'}
               mt={8}
               color={'white'}
@@ -114,9 +116,9 @@ import {
                 transform: 'translateY(-2px)',
                 boxShadow: 'lg',
               }} onClick={handleShow}>
-              Update
+              Update Profile
             </Button>
-
+</div>
           </Box>
         </Box>
       </Center>

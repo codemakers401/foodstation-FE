@@ -24,7 +24,7 @@ export default function Header() {
         <Offcanvas.Body>
           <ul>
             <li><a href="/home">Home</a></li>
-            <li><a href="#features">Profile</a></li>
+            <li><a href="/profile">Profile</a></li>
             {LoggedIn_LoggedOut.LoggedIn &&
 
               <li><a href="/" onClick={LoggedIn_LoggedOut.logoutFunction}>Log Out</a></li>
@@ -34,7 +34,10 @@ export default function Header() {
               <li><a href="/signin">Log In</a></li>
 
             }
+                        {!LoggedIn_LoggedOut.LoggedIn &&
+
             <li><a href="/signup">Sign up</a></li>
+                        }
             <li><a href="/about">About Us</a></li>
 
           </ul>
