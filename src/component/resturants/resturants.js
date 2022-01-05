@@ -8,18 +8,21 @@ import { Button, Modal, Form } from 'react-bootstrap'
 
 export default function Resturants() {
     const [data, setData] = useState([])
+    const [fresh, setFresh] = useState(false)
 
 
-    useEffect(async () => {
 
+    useEffect( () => {
+        async function fetchData() {
         let api = 'http://localhost:3020'
         let cookieData = cookie.load('token')
         let resturantData = await superagent.get(`${api}/restaurant`).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(resturantData);
         setData(resturantData.body)
+        }
+        fetchData()
 
-
-    }, [data]);
+    }, [fresh]);
 
     const deleteResturant = async (e) => {
         let cookieData = cookie.load('token')
@@ -27,7 +30,7 @@ export default function Resturants() {
         console.log(e.target.id);
         let api = 'http://localhost:3020'
         let deleteResturant = await superagent.delete(`${api}/restaurant/${e.target.id}`).set({ 'Authorization': 'Bearer ' + cookieData.token })
-
+        setFresh(!fresh);
     }
 
 
@@ -59,6 +62,7 @@ const handleShowNew =()=>{
         let api = 'http://localhost:3020'
         let updateResturant = await superagent.put(`${api}/restaurant/${id}`,updatedData).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(updateResturant);
+        setFresh(!fresh);
     }
 
     const addResturant = async(e)=>{
@@ -74,6 +78,7 @@ const handleShowNew =()=>{
         let api = 'http://localhost:3020'
         let addResturant = await superagent.post(`${api}/restaurant`,adddData).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(addResturant);
+        setFresh(!fresh);
     }
 
     return (

@@ -1,20 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { LoginContext } from './context/context'
 import {Form} from 'react-bootstrap'
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
+import {Flex,Box,FormControl,FormLabel,Input,Checkbox,Stack,Link,Button,Heading,Text,useColorModeValue,  } from '@chakra-ui/react';
   
   export default function SimpleCard() {
     const LogInContext = useContext(LoginContext)

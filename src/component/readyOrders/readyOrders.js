@@ -19,16 +19,18 @@ const [data,setData] = useState([])
 const [refresh , setRefresh] = useState(false)
 console.log(data);
 
-    useEffect(async () => {
+    useEffect( () => {
+        async function fetchData() { 
         let api = 'http://localhost:3020'
         let cookieData = cookie.load('token')
         
         let toDataBase = await superagent.get(`${api}/allOrders`).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(toDataBase.body);
-        let filterdArray = toDataBase.body.filter(item=>item.orderStatus.StatusName === 'accepted')
+        let filterdArray = toDataBase.body.filter(item=>item.orderStatus.id === 2)
         console.log(filterdArray);
 
-        setData(filterdArray)
+        setData(filterdArray)}
+       fetchData() 
     }, [refresh]);
 
  const addToMyCar=async(e,index)=>{

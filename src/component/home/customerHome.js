@@ -1,38 +1,69 @@
-import React from 'react'
-import { Card, Button ,Row} from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Card, Button, Row } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import Img1 from '../../asset/resturant.jpg'
 import Img2 from '../../asset/items.jpg'
 import Img3 from '../../asset/report.png'
 import Img4 from '../../asset/shop.jpg'
-export default function customerHome() {
+import socketIOClient from "socket.io-client";
+import cookie from 'react-cookies';
+import superagent from 'superagent'
+
+export default function CustomerHome() {
+    const [response, setResponse] = useState("");
+    useEffect(() => {
+        async function fetchData() {
+            let api = 'http://localhost:3020'
+            let cookieData = cookie.load('token')
+            let driverOrders = await superagent.get(`${api}/order/${cookieData.id}`).set({ 'Authorization': 'Bearer ' + cookieData.token })
+            setmyOOrder(driverOrders.body)
+            const socket = socketIOClient(ENDPOINT);
+            let x = myOOrder[0]
+            socket.emit('createOrder', (response) => {
+
+                setResponse(myOOrder[0]);
+                console.log(myOOrder);
+            });
+            socket.on('updateBill', (x) => {
+
+                // setResponse(myOOrder[0]);
+                console.log(x);
+            });
+        };
+        fetchData()
+    }, []);
+    const ENDPOINT = 'http://localhost:3020';
+    const [myOOrder, setmyOOrder] = useState([])
+    // const [refresh, setRefresh] = useState(false)
+
+
     return (
-        <div style={{marginLeft : '100px'  }}>
-                    <Row xs={1} md={3} className="g-4">
+        <div style={{ marginLeft: '100px' }}>
+            <Row xs={1} md={3} className="g-4">
 
-            <Card style={{ width: '18rem' , margin:'70px' ,backgroundColor:'orangered' }}>
-                <Card.Img variant="top" src={Img4} />
-                <Card.Body style={{textAlign :'center'}}>
-                    
-                    <Link to="/createOrder">
-                        <Button variant="primary" >Shop Now</Button>
-                    </Link>
-                </Card.Body>
-            </Card>
+                <Card style={{ width: '18rem', margin: '70px', backgroundColor: 'orangered' }}>
+                    <Card.Img variant="top" src={Img4} />
+                    <Card.Body style={{ textAlign: 'center' }}>
 
-            <Card style={{ width: '18rem'  , margin:'70px',backgroundColor:'orangered' }}>
-                <Card.Img variant="top" src={Img3} />
-                <Card.Body style={{textAlign :'center'}}>
-                    
-                    <Link to="/orderReport">
-                        <Button variant="primary">My Orders  </Button>
-                    </Link>
-                </Card.Body>
-            </Card>
+                        <Link to="/createOrder">
+                            <Button variant="primary" >Shop Now</Button>
+                        </Link>
+                    </Card.Body>
+                </Card>
 
-            
+                <Card style={{ width: '18rem', margin: '70px', backgroundColor: 'orangered' }}>
+                    <Card.Img variant="top" src={Img3} />
+                    <Card.Body style={{ textAlign: 'center' }}>
 
-            {/* <Card style={{ width: '18rem'  , margin:'70px'}}>
+                        <Link to="/orderReport">
+                            <Button variant="primary">My Orders  </Button>
+                        </Link>
+                    </Card.Body>
+                </Card>
+
+
+
+                {/* <Card style={{ width: '18rem'  , margin:'70px'}}>
                 <Card.Img variant="top" src={Img3} />
                 <Card.Body>
                     <Card.Title>Trace Order</Card.Title>
