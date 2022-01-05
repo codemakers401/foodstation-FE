@@ -1,25 +1,148 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './component/header'
+import Login from './component/logIn'
+import SignUp from './component/signUp'
+import { LoginContext } from './component/context/context'
+import Resturants from './component/resturants/resturants'
+import Items from './component/item/item'
+import Hero from './component/hero'
+import Status from './component/status/status'
+import Order from './component/order/order'
+import NewOrder from './component/createNewOrder/createNewOrder'
+import ShowItems from './component/showItems/showItems'
+import OrderReport from './component/orderReports/orderReports'
+import ReadyOrders from'./component/readyOrders/readyOrders'
+import DeleveryOrders from './component/readyOrders/deleveryOrders'
+import Profile from './component/profile'
+import GPS from './component/gps/gps'
+import {
+  BrowserRouter as Router,
 
-function App() {
+  Route, Routes
+} from "react-router-dom";
+import Home from './component/home/home'
+import About from './component/about/about'
+import Footer from './component/footer/footer'
+
+export default function App() {
+  const Hoome = useContext(LoginContext)
+
+console.log(Hoome.LoggedIn);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <Router>
 
-export default App;
+
+        <Header />
+
+
+        <Routes>
+
+        <Route exact path="/" element={
+            <>
+             <Hero/>
+            </>
+          }></Route>
+          <Route exact path="/signin" element={
+            <>
+              {Hoome.LoggedIn &&
+                <Home />
+              }
+
+              {!Hoome.LoggedIn &&
+                <Login />
+
+              }
+
+            </>
+          }></Route>
+
+          <Route exact path="/resturants" element={
+            <>
+              <Resturants />
+            </>
+          }></Route>
+
+<Route exact path="/home" element={
+            <>
+            
+              <Home />
+            </>
+          }></Route>
+
+<Route exact path="/createOrder" element={
+            <>
+            
+              <NewOrder />
+            </>
+          }></Route>
+<Route exact path="/items" element={
+            <>
+              <Items />
+            </>
+          }></Route>
+<Route exact path="/status" element={
+            <>
+              <Status />
+            </>
+          }></Route>
+<Route exact path="/gps" element={
+            <>
+              <GPS />
+            </>
+          }></Route>
+
+
+<Route exact path="/order" element={
+            <>
+              <Order />
+            </>
+          }></Route>
+
+<Route exact path="/orderReport" element={
+            <>
+              <OrderReport />
+            </>
+          }></Route>
+
+<Route exact path="/showItems" element={
+            <>
+              <ShowItems />
+            </>
+          }></Route>
+
+<Route exact path="/readyOrders" element={
+            <>
+              <ReadyOrders />
+            </>
+          }></Route>
+
+<Route exact path="/deleveryOrders" element={
+            <>
+              <DeleveryOrders />
+            </>
+          }></Route>
+<Route exact path="/profile" element={
+            <>
+              <Profile />
+            </>
+          }></Route>
+
+<Route exact path="/signup" element={
+            <>
+              <SignUp />
+            </>
+          }></Route>
+          <Route exact path ='/about' element={
+            <>
+            <About/>
+            </>
+          }></Route>
+        </Routes>
+
+        <Footer/>
+      </Router>
+    </div>
+  )
+}
