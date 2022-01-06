@@ -50,7 +50,9 @@ const handleShowNew =()=>{
                 let id = resturantID
         let updatedData = {
             restaurantName: e.target.name.value,
-            restaurantLocation: e.target.address.value
+            restaurantLocation: e.target.address.value,
+            resturantimg : e.target.img.value
+
         }
         setShow1(false)
 
@@ -64,7 +66,8 @@ const handleShowNew =()=>{
     const addResturant = async(e)=>{
         let adddData = {
             restaurantName: e.target.name.value,
-            restaurantLocation: e.target.address.value
+            restaurantLocation: e.target.address.value,
+            resturantimg : e.target.img.value
         }
 
         setShow2(false)
@@ -77,9 +80,9 @@ const handleShowNew =()=>{
     }
 
     return (
-        <div >
+        <div style={{margin:'100px'}}>
                 <div style={{textAlign:'center'}}><Button variant="primary" onClick={handleShowNew}>ADD NEW RESTURANT</Button></div>  <br/>
-            <Table striped bordered hover variant="light" style={{margin:'100px'}}>
+            <Table striped bordered hover variant="light" >
                 <thead>
                     <tr>
 
@@ -127,6 +130,12 @@ const handleShowNew =()=>{
                             id="address"
                             aria-describedby="passwordHelpBlock"
                         />
+                         <Form.Label htmlFor="inputPassword5">Resturant Img</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="img"
+                            aria-describedby="passwordHelpBlock"
+                        />
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
@@ -158,6 +167,12 @@ const handleShowNew =()=>{
                         <Form.Control
                             type="text"
                             id="address"
+                            aria-describedby="passwordHelpBlock"
+                        />
+                         <Form.Label htmlFor="inputPassword5">Resturant Img</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="img"
                             aria-describedby="passwordHelpBlock"
                         />
                         <Modal.Footer>

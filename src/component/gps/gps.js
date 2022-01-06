@@ -1,45 +1,41 @@
-import React ,{useEffect,Component }from 'react'
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import './gps.css'
-import MAP from './newComponent'
-export default function Gps() {
-
-useEffect(() => {
-   if ("geolocation" in navigator) {
-          console.log("Available");
-        } else {
-          console.log("Not Available");
-        }
-       
-
-}, [])
-useEffect(() => {
-  
-    navigator.geolocation.getCurrentPosition(function(position) {
-        console.log(position)
+import React, { useState, useEffect } from 'react'
+import socketIOClient from "socket.io-client";
+import cookie from 'react-cookies';
+import superagent from 'superagent'
+import { AspectRatio } from '@chakra-ui/react'
+export default function CustomerHome() {
+  const [response, setResponse] = useState("");
+  const [xx, setXx] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      let api = 'http://localhost:3020'
+      let cookieData = cookie.load('token')
+      let driverOrders = await superagent.get(`${api}/order/${cookieData.id}`).set({ 'Authorization': 'Bearer ' + cookieData.token })
+      setmyOOrder(driverOrders.body)
+      const socket = socketIOClient(ENDPOINT);
+      socket.emit('createOrder', (response) => {
+        setResponse(myOOrder[0]);
+        console.log(myOOrder);});
+      socket.on('updateBill', (x) => {
+        setXx([x]);
+        console.log(x);
       });
- 
- }, [])
-
- useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-          console.log(position);
-        },
-        function(error) {
-          console.error("Error Code = " + error.code + " - " + error.message);
-        }
-      );
- }, [])
-    
-
-    return (
-        <div id="map">
-       <MAP/>    
-        </div>
-    )
-
-    }
-
-
-// AIzaSyBF5UK5yCXthu2fAkGajC5rxS9DRZVu2i0
+    };
+    fetchData()
+  }, []);
+  const updatx =(x)=>{ setXx([x])  }
+  const ENDPOINT = 'http://localhost:3020';
+  const [myOOrder, setmyOOrder] = useState([])
+  const [refresh, setRefresh] = useState(false)
+  return (
+    <>
+     <AspectRatio ratio={10 / 9}>
+  <iframe title="123"
+    src={`https://maps.google.com/maps?q=${xx[0]}&hl=es&z=14&amp;output=embed`}
+    target="_parent"
+    alt='demo'
+  />
+</AspectRatio>
+    </>
+  )
+};

@@ -34,13 +34,13 @@ const getDetails=()=>{
 
 
     return (
-        <>
+        <div style={{marginBottom :'40px'}}>
         {(!allOrder ||allOrder.length === 0) && 
  <div>NO ORDER AVILABLE</div>}
-                <Row xs={1} md={3} className="g-4">
+                <Row xs={1} md={4} className="g-4">
 {console.log(allOrder)}
         {allOrder && allOrder.map((item,index)=>{
-              
+              console.log(item);
        return (
            <>
          
@@ -55,8 +55,7 @@ const getDetails=()=>{
           textAlign={'center'}>
           <Avatar
             size={'xl'}
-            src={
-              'https://thumbs.dreamstime.com/b/food-drone-logo-icon-design-can-be-used-as-complement-to-125574252.jpg'
+            src={item.orders[0].item.itemimg
             }
             alt={'Avatar Alt'}
             mb={4}
@@ -126,6 +125,6 @@ const getDetails=()=>{
  </Row>
 
  
-</>
+</div>
     );
   }

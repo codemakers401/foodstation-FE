@@ -5,6 +5,7 @@ import superagent from 'superagent'
 import cookie from 'react-cookies';
 import { Modal, Form, Row, Table } from 'react-bootstrap'
 import Res from '../../asset/res.jpg'
+import swal from 'sweetalert'
 
 export default function CreateNewOrder() {
   const [data, setData] = useState([])
@@ -13,6 +14,9 @@ export default function CreateNewOrder() {
   const [show, setShow] = useState(false);
   const [order, setOrder] = useState([{}])
   const [id, setID] = useState()
+  const [itemPrice, setItemPrice] = useState()
+  const [itemName, setItemName] = useState()
+
   const [refresh , setRefresh] = useState(false)
   useEffect(async () => {
     let api = 'http://localhost:3020'
@@ -44,18 +48,26 @@ export default function CreateNewOrder() {
 
 
   const handleShow = (e) => {
-    console.log(e.target.id);
-    let idd = e.target.id
+    console.log('..........',e);
+    let idd = e.itemId
+    let itemName = e.itemName
+    let itemprice = e.itemPrice
+    console.log('/////////////',itemName,itemprice);
+
     setID(idd)
+    setItemPrice(itemprice)
+    setItemName(itemName)
     setShow(true)
   }
   const getQuantity = (e) => {
     e.preventDefault()
     console.log(e.target.qty.value);
     let quantity = e.target.qty.value
+    
+
     console.log(order);
     let xig = order
-xig=[...order, { itemID: id, qty: quantity }]
+xig=[...order, { itemID: id, qty: quantity , itemName : itemName , totalPrice : itemPrice }]
     setOrder(xig)
     
     cookie.save('order', xig)
@@ -74,7 +86,8 @@ xig=[...order, { itemID: id, qty: quantity }]
 
   const confirmOrder =async (e) => {
     e.preventDefault()
-    console.log('oooooooooooooooooooooo');
+    console.log('oooooooooooooooooooooo',order[e.target.id]);
+    
     let confirmedOrder =  order[e.target.id]
 let api = 'http://localhost:3020'
 let cookieData = cookie.load('token')
@@ -84,13 +97,20 @@ console.log(toDataBase);
 order.splice(e.target.id, 1)
 cookie.save('order', order)
 setRefresh(!refresh)
-
+swal("Good job!", "Order Confirm!", "success");
 
   }
   return (
-    <>
+
+    <div style={{margin :'30px' , display:'flex'}}>
+      <div style={{width:'30%'}}>
+     <span style={{margin :'40px' , fontSize:'50px' , color :'gray'}} >RESTURANTS</span> 
+
+     
       {showItems &&
-        <Row xs={1} md={3} className="g-4">
+
+      
+        <Row xs={1} md={1} className="g-4">
           {data.map((item, index) => {
             return (
               <Center py={6}>
@@ -99,13 +119,13 @@ setRefresh(!refresh)
                   w={'full'}
                   boxShadow={'2xl'}
                   rounded={'lg'}
-                  bg={'orangered'}
+                  bg={'orange.200'}
                   p={6}
                   textAlign={'center'}>
                   <Avatar
                     size={'xxl'}
                     src={
-                      Res                    }
+                      item.resturantimg                    }
                     alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
@@ -170,21 +190,26 @@ setRefresh(!refresh)
         </Row>
 
       }
-
+      </div>
+      <div style={{marginTop:'-50px'}}>
       {!showItemss &&
-        <Row xs={1} md={6} className="g-4" >
+      <>
+                   <br/> <br/> <span style={{margin :'80px' , fontSize:'50px' , color :'gray'}} >ITEMS</span> 
+
+        <Row xs={1}className="g-4" >
           {  items.map((item, index) => {
             { console.log(item) }
             return (
 
-              <Center py={6} style={{margin : '100px'}}>
+              <Center py={6} style={{margin : '40px'}}>
 
 
                 <Box
 
 
+bg={'orange.100'}
 
-                  maxW={'320px'}
+                  maxW={'250px'}
                   w={'full'}
                   boxShadow={'2xl'}
                   rounded={'lg'}
@@ -197,17 +222,25 @@ item.itemimg                    }
                     alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
-                    _after={{
+                    _after={item.available ?{
                       content: '""',
                       w: 4,
                       h: 4,
-                      bg: 'green.300',
-                      border: '2px solid white',
+                      bg: 'green.400',
+                      border: '1px solid white',
                       rounded: 'full',
                       pos: 'absolute',
                       bottom: 0,
-                      right: 3,
-                    }}
+                      right: 0,
+                  }:{content: '""',
+                  w: 4,
+                  h: 4,
+                  bg: 'red.500',
+                  border: '1px solid white',
+                  rounded: 'full',
+                  pos: 'absolute',
+                  bottom: 0,
+                  right: 0,}}
                   />
                   <Heading fontSize={'2xl'} fontFamily={'body'}>
 
@@ -257,8 +290,8 @@ item.itemimg                    }
                       _focus={{
                         bg: 'blue.500',
                       }}
-                      id={item.itemId}
-                      onClick={handleShow}
+                      
+                      onClick={()=>handleShow(item)}
                     >
                       Add To Cart
                     </Button>
@@ -271,9 +304,10 @@ item.itemimg                    }
 
             )
           })}
+         
         </Row>
-
-      }
+</>
+      } </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -328,16 +362,19 @@ item.itemimg                    }
         </Modal.Body>
 
       </Modal>
-
+      <div style={{ marginLeft:'200px',marginTop:'30px'}}>
+        <img src='https://st.depositphotos.com/1005920/1471/i/950/depositphotos_14714897-stock-photo-shopping-cart-icon.jpg' style={{height:'50px'}}></img>
       <Table striped bordered hover variant="light" >
         <thead>
           <tr>
 
             <th>No.</th>
-            <th>Item ID</th>
+            <th>Item Name</th>
             
 
             <th>Quantity</th>
+            <th>Total Price</th>
+
             <th>Delete</th>
             <th>Confirm</th>
 
@@ -347,15 +384,17 @@ item.itemimg                    }
         <tbody>
 
           { order && order.map((item, index) => {
-
+console.log(item);
             return (
               <tr key={index}>
 
                 <td>{index + 1}</td>
-                <td>{item.itemID}</td>
+                <td>{item.itemName}</td>
                 
 
                 <td>{item.qty}</td>
+                <td>{item.totalPrice*item.qty} $</td>
+
                 <td > <Button flex={1}
                   fontSize={'sm'}
                   rounded={'full'}
@@ -392,7 +431,7 @@ item.itemimg                    }
           })}
         </tbody>
       </Table>
+</div>
 
-
-    </>)
+    </div>)
 }

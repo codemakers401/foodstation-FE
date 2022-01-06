@@ -57,9 +57,11 @@ const handleShowNew =()=>{
 }
     const updateResturant =async (e) => {
         e.preventDefault()
+        console.log(e.target.img.value);
                 let id = resturantID
                 let updatedData={
-                    StatusName : e.target.name.value
+                    StatusName : e.target.name.value,
+                    statusimg : e.target.img.value
 
 
                 }
@@ -78,7 +80,8 @@ const handleShowNew =()=>{
 
         let adddData = {
             
-            StatusName:e.target.name.value
+            StatusName:e.target.name.value,
+            statusimg : e.target.img.value
         }
 
         setShow2(false)
@@ -93,11 +96,13 @@ const handleShowNew =()=>{
 
     return (
         <>
+        <div style={{textAlign : 'center' , marginTop:'70px'}} >
         <Button flex={1}
                         fontSize={'sm'}
                         rounded={'full'}
                         bg={'blue.400'}
                         color={'white'}
+                        
                         boxShadow={
                             '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                         }
@@ -107,10 +112,11 @@ const handleShowNew =()=>{
                         _focus={{
                             bg: 'blue.500',
                         }} onClick={handleShowNew}>ADD NEW STATUS</Button>
-
+</div>
         <Row xs={1} md={3} className="g-4">
 
         { data.map((item,index)=>{
+            console.log(item);
         return(
         <Center py={6}>
            
@@ -129,8 +135,7 @@ const handleShowNew =()=>{
                 <Avatar
                     size={'xl'}
                     src={
-                        'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-                    }
+item.statusimg                    }
                     alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
@@ -201,10 +206,18 @@ const handleShowNew =()=>{
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={updateResturant}>
-                    <Form.Label htmlFor="inputPassword5">Item Name</Form.Label>
+                    <Form.Label htmlFor="inputPassword5">Status Name</Form.Label>
                         <Form.Control
                             type="text"
                             id="name"
+                            aria-describedby="passwordHelpBlock"
+                      
+                        
+                        />
+                                        <Form.Label htmlFor="inputPassword5">Status Img</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="img"
                             aria-describedby="passwordHelpBlock"
                       
                         
@@ -258,6 +271,13 @@ const handleShowNew =()=>{
                         <Form.Control
                             type="text"
                             id="name"
+                            aria-describedby="passwordHelpBlock"
+                       
+                        />
+                         <Form.Label htmlFor="inputPassword5">Status Img</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="img"
                             aria-describedby="passwordHelpBlock"
                        
                         />

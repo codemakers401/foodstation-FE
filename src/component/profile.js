@@ -16,6 +16,7 @@ import {
   import superagent from 'superagent'
   import cookie from 'react-cookies';
   import { Modal, Form, Row, Table } from 'react-bootstrap'
+  import swal from 'sweetalert'
 
 
   export default function SocialProfileWithImage() {
@@ -49,11 +50,13 @@ import {
        let getProfile = await superagent.put(`${api}/profile`,updatedData).set({ 'Authorization': 'Bearer ' + cookieData.token })
       console.log(getProfile);
        setProfileData(getProfile.body)
+       swal("Good job!", "Profile Updated!", "success");
+
      }
 
 
     return (
-        <>
+        <div style={{marginBottom:'10px'}}>
         {!authContext.LoggedIn &&
              <LoggedIN/>
         }
@@ -193,6 +196,6 @@ import {
 </Modal>
      </> )
     })}
-      </>
+      </div>
     );
   }

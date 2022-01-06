@@ -8,7 +8,7 @@ import {
     Button,
     Link,
     Badge,
-    useColorModeValue,
+    useColorModeValue,Checkbox
 } from '@chakra-ui/react';
 import React, { useState, useEffect, useContext } from 'react'
 import superagent from 'superagent'
@@ -19,6 +19,7 @@ import  {  Modal, Form ,Row } from 'react-bootstrap'
 export default function SocialProfileSimple() {
 
     const [data, setData] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
 
     useEffect(async () => {
@@ -30,7 +31,7 @@ export default function SocialProfileSimple() {
         setData(resturantData.body)
 
 
-    }, [data]);
+    }, [refresh]);
 
     const deleteResturant = async (e) => {
         let cookieData = cookie.load('token')
@@ -38,7 +39,7 @@ export default function SocialProfileSimple() {
         console.log(';;;;',e.target.id);
         let api = 'http://localhost:3020'
         let deleteResturant = await superagent.delete(`${api}/item/${e.target.id}`).set({ 'Authorization': 'Bearer ' + cookieData.token })
-
+        setRefresh(!refresh)
     }
 
 
@@ -65,7 +66,7 @@ const handleShowNew =()=>{
                     itemimg:e.target.img.value,
 
                     restaID : e.target.id.value,
-                    available:e.target.status.value
+                    available:e.target.status.checked
 
 
                 }
@@ -77,6 +78,8 @@ const handleShowNew =()=>{
         let api = 'http://localhost:3020'
         let updateResturant = await superagent.put(`${api}/item/${id}`,updatedData).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(updateResturant);
+        setRefresh(!refresh)
+
     }
 
 
@@ -90,7 +93,7 @@ const handleShowNew =()=>{
             itemimg:e.target.img.value,
 
             restaID : e.target.id.value,
-            available:e.target.status.value
+            available:e.target.status.checked
 
         }
 
@@ -101,16 +104,20 @@ const handleShowNew =()=>{
         let api = 'http://localhost:3020'
         let addResturant = await superagent.post(`${api}/item`,adddData).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(addResturant.body);
+        setRefresh(!refresh)
+
     }
 
 
     return (
         <>
+        <div style={{textAlign :'center' , marginTop : '50px'}}>
         <Button flex={1}
                         fontSize={'sm'}
                         rounded={'full'}
                         bg={'blue.400'}
                         color={'white'}
+
                         boxShadow={
                             '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                         }
@@ -120,8 +127,8 @@ const handleShowNew =()=>{
                         _focus={{
                             bg: 'blue.500',
                         }} onClick={handleShowNew}>ADD NEW Item</Button>
-
-        <Row xs={1} md={3} className="g-4">
+</div>
+        <Row xs={1} md={4} className="g-4">
 
         { data.map((item,index)=>{
              console.log(item.itemId);
@@ -133,7 +140,7 @@ const handleShowNew =()=>{
             <Box
 
  
-
+                bg={'orange.100'}
                 maxW={'320px'}
                 w={'full'}
                 boxShadow={'2xl'}
@@ -147,17 +154,26 @@ const handleShowNew =()=>{
                     alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
-                    _after={{
+                    
+                    _after={item.available ?{
                         content: '""',
                         w: 4,
                         h: 4,
-                        bg: 'green.300',
-                        border: '2px solid white',
+                        bg: 'green.400',
+                        border: '1px solid white',
                         rounded: 'full',
                         pos: 'absolute',
                         bottom: 0,
-                        right: 3,
-                    }}
+                        right: 0,
+                    }:{content: '""',
+                    w: 4,
+                    h: 4,
+                    bg: 'red.500',
+                    border: '1px solid white',
+                    rounded: 'full',
+                    pos: 'absolute',
+                    bottom: 0,
+                    right: 0,}}
                 />
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
                   
@@ -177,7 +193,7 @@ const handleShowNew =()=>{
                         px={2}
                         py={1}
                         fontWeight={'400'}>
-                        Price : {item.itemPrice}
+                        Price : {item.itemPrice}  $
                     </Badge>
                
                 </Stack>
@@ -257,9 +273,14 @@ const handleShowNew =()=>{
                          <Form.Label htmlFor="inputPassword5">Available Status </Form.Label>
                         <Form.Control
                             type="boolean"
-                            id="status"
+                            id="ava"
                             aria-describedby="passwordHelpBlock"
                         />
+                        <Stack spacing={5} direction='row' >
+                                            <Checkbox colorScheme='green' id ="status" defaultIsChecked>
+                                            Available
+                                            </Checkbox>
+                                        </Stack>
                         <Modal.Footer>
                             <Button   flex={1}
                         fontSize={'sm'}
@@ -338,10 +359,14 @@ const handleShowNew =()=>{
                          <Form.Label htmlFor="inputPassword5">Avalibale Status </Form.Label>
                         <Form.Control
                             type="boolean"
-                            id="status"
+                            id="ava"
                             aria-describedby="passwordHelpBlock"
                         />
-                      
+                      <Stack spacing={5} direction='row' >
+                                            <Checkbox colorScheme='green' id ="status" defaultIsChecked>
+                                            Available
+                                            </Checkbox>
+                                        </Stack>
                         <Modal.Footer>
                             <Button  flex={1}
                         fontSize={'sm'}

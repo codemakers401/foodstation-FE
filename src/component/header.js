@@ -22,8 +22,10 @@ export default function Header() {
           <Offcanvas.Title className='title'>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
+
+        
           <ul>
-            <li><a href="/home">Home</a></li>
+            <li><a href="/home"> Home</a></li>
             <li><a href="/profile">Profile</a></li>
             {LoggedIn_LoggedOut.LoggedIn &&
 
@@ -48,7 +50,7 @@ export default function Header() {
         <Container>
           <MdMenu onClick={handleShow} size={70} color={'white'} />
 
-          <a href='#home' className="black">
+          <a href='#home' className="black" >
             <img
               src={black}
               width="200"

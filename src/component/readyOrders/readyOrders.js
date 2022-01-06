@@ -14,6 +14,8 @@ import {
 import {Row} from 'react-bootstrap'
 import superagent from 'superagent'
 import cookie from 'react-cookies';
+import swal from 'sweetalert'
+import img from '../../asset/noItems.png'
 export default function ReadyOrders() {
 const [data,setData] = useState([])
 const [refresh , setRefresh] = useState(false)
@@ -42,6 +44,7 @@ let newData = {statusID :data[index].statusID+1 , driverid :cookieData.id }
 let updateStatus = await  superagent.put(`${api}/order/${e.id}`,newData).set({ 'Authorization': 'Bearer ' + cookieData.token })
 
 setRefresh(!refresh)
+swal("Good job!", "You picked order!", "success");
 
 
  }
@@ -50,10 +53,12 @@ setRefresh(!refresh)
 
 
     return (
-        <div>
-                            <Row xs={1} md={6} className="g-4">
+        <div style={{marginBottom:'150px'}}>
+                            <Row xs={1} md={3} className="g-4">
                   {(!data  || !data.length ) && 
-                   <div>No Order Now</div>
+                   
+                   <img src={img} style={{margin :'100px',marginLeft:'500px'}}></img>
+                   
                   }
             {data.map((item,index)=>{
                 console.log(item);
@@ -64,15 +69,14 @@ setRefresh(!refresh)
                 <Box
                     maxW={'320px'}
                     w={'full'}
-                    bg={'orangered'}
+                    bg={'gray'}
                     boxShadow={'2xl'}
                     rounded={'lg'}
                     p={6}
                     textAlign={'center'}>
                     <Avatar
                         size={'xl'}
-                        src={
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6uEM-z4p9RJ64hourfB4jqBUI0O-iJQdLjbKTcPV3HIKFIXaIF3d2Tv-8OYBUj-XPEH0&usqp=CAU'
+                        src={item.orders[0].item.itemimg
                         }
                         alt={'Avatar Alt'}
                         mb={4}

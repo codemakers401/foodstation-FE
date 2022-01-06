@@ -8,10 +8,8 @@ export default function footer() {
     return (
         <div>
             <footer>
-                <section>
-                <AiFillHome size={35} color={'white'}/>
-                <MdAccountCircle size={35} color={'white'}/>
-                </section>
+               
+                
             &copy; Foodstation 2022
             </footer>
         </div>

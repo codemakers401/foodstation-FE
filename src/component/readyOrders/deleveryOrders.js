@@ -14,6 +14,8 @@ import {
     Badge,
     useColorModeValue,
 } from '@chakra-ui/react';
+import swal from 'sweetalert'
+
 export default function DeleveryOrders() {
 
 const [myOOrder,setmyOOrder] = useState([])
@@ -45,22 +47,26 @@ const [refresh , setRefresh] = useState(false)
     let updateStatus = await  superagent.put(`${api}/order/${e.id}`,newData).set({ 'Authorization': 'Bearer ' + cookieData.token })
     }
     setRefresh(!refresh)
+    swal("Good job!", "You changed status!", "success");
+
 }
 
 
 
 
     return (
-        <div>
+        <div style={{marginBottom:'70px'}}>
                   <Row xs={1} md={4} className="g-4">
 
 {myOOrder.map((item,index)=>{
     console.log(item);
     return(
-
-
+    <>
+    {item.statusID === 2 && 
+<div>
 <Center py={6}>
     <Box
+    bg='gray.300'
         maxW={'320px'}
         w={'full'}
         boxShadow={'2xl'}
@@ -70,8 +76,7 @@ const [refresh , setRefresh] = useState(false)
         <Avatar
             size={'xl'}
             src={
-                'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+item.orderStatus.statusimg           }
             alt={'Avatar Alt'}
             mb={4}
             pos={'relative'}
@@ -94,13 +99,26 @@ const [refresh , setRefresh] = useState(false)
             STATUS : {item.orderStatus.StatusName}
         </Text>
         <Text fontWeight={600} color={'gray.500'} mb={4}>
-            TOTAL : {item.totalBill}
+            TOTAL : {item.totalBill} $
         </Text>
         <Text
             textAlign={'center'}
             color={'gray.500'}
             px={3}>
-            ADDRESS : 
+            ADDRESS : {item.user.userAddress}
+
+        </Text>
+        <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Customer Name : {item.user.username}
+
+        </Text> <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Phone : {item.user.userPhone}
 
         </Text>
 
@@ -133,6 +151,204 @@ const [refresh , setRefresh] = useState(false)
         </Stack>
     </Box>
 </Center> 
+</div>}
+</>
+   )
+})}
+
+{myOOrder.map((item,index)=>{
+    console.log(item);
+    return(
+    <>
+    {item.statusID === 3 && 
+<div>
+<Center py={6}>
+    <Box
+    bg='yellow.200'
+        maxW={'320px'}
+        w={'full'}
+        boxShadow={'2xl'}
+        rounded={'lg'}
+        p={6}
+        textAlign={'center'}>
+        <Avatar
+            size={'xl'}
+            src={
+                item.orderStatus.statusimg           }
+            alt={'Avatar Alt'}
+            mb={4}
+            pos={'relative'}
+            _after={{
+                content: '""',
+                w: 4,
+                h: 4,
+                bg: 'green.300',
+                border: '2px solid white',
+                rounded: 'full',
+                pos: 'absolute',
+                bottom: 0,
+                right: 3,
+            }}
+        />
+        <Heading fontSize={'2xl'} fontFamily={'body'}>
+           Bill No. : {item.id}
+        </Heading>
+        <Text fontWeight={600} color={'gray.500'} mb={4}>
+            STATUS : {item.orderStatus.StatusName}
+        </Text>
+        <Text fontWeight={600} color={'gray.500'} mb={4}>
+            TOTAL : {item.totalBill} $
+        </Text>
+        <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            ADDRESS : {item.user.userAddress}
+
+        </Text>
+        <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Customer Name : {item.user.username}
+
+        </Text> <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Phone : {item.user.userPhone}
+
+        </Text>
+
+      
+
+        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+
+        </Stack>
+
+        <Stack mt={8} direction={'row'} spacing={4}>
+
+            <Button
+                flex={1}
+                fontSize={'sm'}
+                rounded={'full'}
+                bg={'blue.400'}
+                color={'white'}
+                boxShadow={
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                }
+                _hover={{
+                    bg: 'blue.500',
+                }}
+                _focus={{
+                    bg: 'blue.500',
+                }} onClick={()=>onTheWayStatus(item,index)}>
+                Next Status
+            </Button>
+           
+        </Stack>
+    </Box>
+</Center> 
+</div>}
+</>
+   )
+})}
+
+{myOOrder.map((item,index)=>{
+    console.log(item);
+    return(
+    <>
+    {item.statusID === 4 && 
+<div>
+<Center py={6}>
+    <Box
+    bg='green.300'
+        maxW={'320px'}
+        w={'full'}
+        boxShadow={'2xl'}
+        rounded={'lg'}
+        p={6}
+        textAlign={'center'}>
+        <Avatar
+            size={'xl'}
+            src={
+                item.orderStatus.statusimg           }
+            alt={'Avatar Alt'}
+            mb={4}
+            pos={'relative'}
+            _after={{
+                content: '""',
+                w: 4,
+                h: 4,
+                bg: 'green.300',
+                border: '2px solid white',
+                rounded: 'full',
+                pos: 'absolute',
+                bottom: 0,
+                right: 3,
+            }}
+        />
+        <Heading fontSize={'2xl'} fontFamily={'body'}>
+           Bill No. : {item.id}
+        </Heading>
+        <Text fontWeight={600} color={'gray.500'} mb={4}>
+            STATUS : {item.orderStatus.StatusName}
+        </Text>
+        <Text fontWeight={600} color={'gray.500'} mb={4}>
+            TOTAL : {item.totalBill} $
+        </Text>
+        <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            ADDRESS : {item.user.userAddress}
+
+        </Text>
+        <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Customer Name : {item.user.username}
+
+        </Text> <Text
+            textAlign={'center'}
+            color={'gray.500'}
+            px={3}>
+            Phone : {item.user.userPhone}
+
+        </Text>
+
+      
+
+        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+
+        </Stack>
+
+        <Stack mt={8} direction={'row'} spacing={4}>
+
+            <Button
+                flex={1}
+                fontSize={'sm'}
+                rounded={'full'}
+                bg={'blue.400'}
+                color={'white'}
+                boxShadow={
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                }
+                _hover={{
+                    bg: 'blue.500',
+                }}
+                _focus={{
+                    bg: 'blue.500',
+                }} onClick={()=>onTheWayStatus(item,index)}>
+                Next Status
+            </Button>
+           
+        </Stack>
+    </Box>
+</Center> 
+</div>}
+</>
    )
 })}
 </Row>

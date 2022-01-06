@@ -8,10 +8,10 @@ import Img4 from '../../asset/status.jpg'
 
 export default function customerHome() {
     return (
-        <div>
-                    <Row xs={1} md={3} className="g-4">
+        <div style={{marginBottom:'100px' , marginTop:'50px'}}>
+                    <Row xs={1} md={4} className="g-4">
 
-            <Card style={{ width: '18rem' , margin:'50px' , backgroundColor :'orangered'}}>
+            <Card style={{ width: '18rem' , margin:'40px' , backgroundColor :'gray'}}>
                 <Card.Img variant="top" src={Img1} />
                 <Card.Body style={{textAlign : 'center'}}>
                    
@@ -21,7 +21,7 @@ export default function customerHome() {
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem', margin:'50px' ,backgroundColor :'orangered' }}>
+            <Card style={{ width: '18rem', margin:'40px' ,backgroundColor :'gray' }}>
                 <Card.Img variant="top" src={'https://cdn4.iconfinder.com/data/icons/hotel-and-restaurant-1-8/50/71-512.png'} />
                 <Card.Body style={{textAlign : 'center'}}>
                     <Link to ="/items" >
@@ -30,7 +30,7 @@ export default function customerHome() {
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem' , margin:'50px' ,backgroundColor :'orangered'}}>
+            <Card style={{ width: '18rem' , margin:'40px' ,backgroundColor :'gray'}}>
                 <Card.Img variant="top" src={Img4} />
                 <Card.Body style={{textAlign : 'center'}}>
                     <Link to ="/status">
@@ -39,7 +39,7 @@ export default function customerHome() {
                 </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem', margin:'50px' , backgroundColor :'orangered'}}>
+            <Card style={{ width: '18rem', margin:'40px' , backgroundColor :'gray'}}>
                 <Card.Img variant="top" src={Img3} />
                 <Card.Body style={{textAlign : 'center'}}>
                     <Link to ="/order">

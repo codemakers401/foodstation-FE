@@ -8,6 +8,7 @@ import { Button, Modal, Form } from 'react-bootstrap'
 
 export default function Resturants() {
     const [data, setData] = useState([])
+    const [r, setr] = useState(false)
 
 
     useEffect(async () => {
@@ -19,7 +20,7 @@ export default function Resturants() {
         setData(resturantData.body)
 
 
-    }, [data]);
+    }, [r]);
 
     
 
@@ -52,6 +53,7 @@ const handleShowNew =()=>{
         let api = 'http://localhost:3020'
         let updateResturant = await superagent.put(`${api}/order/${id}`,updatedData).set({ 'Authorization': 'Bearer ' + cookieData.token })
         console.log(updateResturant);
+        setr(!r)
     }
 
    
@@ -59,8 +61,8 @@ const handleShowNew =()=>{
       
 
     return (
-        <div >
-           <h1 style={{textAlign : 'center',fontSize:'20px' , color:'blue'}}>ORDERS</h1><br/> 
+        <div style={{margin : '150px'}} >
+           <h1 style={{textAlign : 'center',fontSize:'70px' , color:'orangered'}}>ORDERS</h1><br/> 
             <Table striped bordered hover variant="light">
                 <thead>
                     <tr>
